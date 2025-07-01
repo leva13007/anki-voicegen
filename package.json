@@ -1,0 +1,9 @@
+{
+  "name": "voice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/text-to-speech": "^6.1.0"
+  }
+}
