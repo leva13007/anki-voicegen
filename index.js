@@ -4,6 +4,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const readline = require('node:readline');
 const textToSpeech = require('@google-cloud/text-to-speech');
+const {random} = require("gamekit-utils");
 
 const VOCAB_DIR = './vocabs/';
 if (!fs.existsSync(VOCAB_DIR)) fs.mkdirSync(VOCAB_DIR);
@@ -19,12 +20,50 @@ const client = new textToSpeech.TextToSpeechClient({
   keyFilename: './keys/round-rain-464601-d4-861a23f6cccf.json',
 });
 
-const voice = { languageCode: 'en-gb', ssmlGender: 'NEUTRAL', name: 'en-GB-Chirp3-HD-Achernar' };
+const voices = [
+  'en-GB-Chirp3-HD-Achernar',
+  'en-GB-Chirp3-HD-Achird',
+  'en-GB-Chirp3-HD-Algenib',
+  'en-GB-Chirp3-HD-Algieba',
+  'en-GB-Chirp3-HD-Alnilam',
+  'en-GB-Chirp3-HD-Aoede',
+  'en-GB-Chirp3-HD-Autonoe',
+  'en-GB-Chirp3-HD-Callirrhoe',
+  'en-GB-Chirp3-HD-Charon',
+  'en-GB-Chirp3-HD-Despina',
+  'en-GB-Chirp3-HD-Enceladus',
+  'en-GB-Chirp3-HD-Erinome',
+  'en-GB-Chirp3-HD-Fenrir',
+  'en-GB-Chirp3-HD-Gacrux',
+  'en-GB-Chirp3-HD-Iapetus',
+  'en-GB-Chirp3-HD-Kore',
+  'en-GB-Chirp3-HD-Laomedeia',
+  'en-GB-Chirp3-HD-Leda',
+  'en-GB-Chirp3-HD-Orus',
+  'en-GB-Chirp3-HD-Puck',
+  'en-GB-Chirp3-HD-Pulcherrima',
+  'en-GB-Chirp3-HD-Rasalgethi',
+  'en-GB-Chirp3-HD-Sadachbia',
+  'en-GB-Chirp3-HD-Sadaltager',
+  'en-GB-Chirp3-HD-Schedar',
+  'en-GB-Chirp3-HD-Sulafat',
+  'en-GB-Chirp3-HD-Umbriel',
+  'en-GB-Chirp3-HD-Vindemiatrix',
+  'en-GB-Chirp3-HD-Zephyr',
+  'en-GB-Chirp3-HD-Zubenelgenubi',
+]
+
+const voice = { languageCode: 'en-gb', ssmlGender: 'NEUTRAL', name: 'en-GB-Chirp3-HD-Fenrir' }; // 'en-GB-Chirp3-HD-Fenrir' 'en-GB-Chirp3-HD-Achernar';
+
+const getVoice = () => {
+  const randomVoice = random(voices);
+  return { languageCode: 'en-gb', ssmlGender: 'NEUTRAL', name: randomVoice };
+}
 
 async function synthesizeToFile(text, filename) {
   const request = {
     input: { text },
-    voice,
+    voice: getVoice() || voice,
     audioConfig: { audioEncoding: 'MP3' },
   };
 
@@ -55,7 +94,7 @@ async function processVocab() {
         await synthesizeToFile(text, filepath);
         await new Promise(res => setTimeout(res, 500)); // ⏱ пауза 0.5с
       } catch (err) {
-        console.error(`❌ Error generating audio for: ${text}`);
+        console.error(`❌ Error generating audio for: ${text}`, err);
         continue;
       }
     } else {

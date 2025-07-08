@@ -339,6 +339,11 @@ function-bind@^1.1.2:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.2.tgz#2c02d864d97f3ea6c8830c464cbd11ab6eab7a1c"
   integrity sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==
 
+gamekit-utils@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/gamekit-utils/-/gamekit-utils-0.1.0.tgz#4d5ebbd7013b61051eabe6ba727f46fbf5c078fa"
+  integrity sha512-M1g/APVfgtmjZVRost7B3maSXhPuu7WYNWPjou4dHt/SKtsr2hbTdx15awQmb1nWrl+4/Tdqv7yEY/9IMIbBIQ==
+
 gaxios@^7.0.0:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/gaxios/-/gaxios-7.1.1.tgz#255b86ce09891e9ed16926443a1ce239c8f9fd51"
